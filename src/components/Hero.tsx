@@ -24,7 +24,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-7xl font-bold mb-6 text-glow-lg bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent"
           >
-            Nevin Kalloorsa
+            Nevin Kalloor
           </motion.h1>
           
           <motion.p
