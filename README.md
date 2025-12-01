@@ -17,6 +17,7 @@ A modern, professional personal portfolio website built with React, TypeScript, 
 - **About**: Professional bio and background
 - **Projects**: Showcase of featured projects with links and technologies
 - **Skills**: Technical competencies organized by category
+- **Resume**: Viewable and downloadable PDF resume
 - **Contact**: Social links and contact information
 
 ## Tech Stack
@@ -70,8 +71,9 @@ npm run preview
 2. **About Section**: Edit `src/components/About.tsx`
 3. **Projects**: Update the `projects` array in `src/components/Projects.tsx`
 4. **Skills**: Update the `skillCategories` array in `src/components/Skills.tsx`
-5. **Contact Links**: Update the `contactLinks` array in `src/components/Contact.tsx`
-6. **Meta Tags**: Edit `index.html` for SEO and social sharing
+5. **Resume**: Place your resume PDF file in the `public/` folder and name it `resume.pdf`
+6. **Contact Links**: Update the `contactLinks` array in `src/components/Contact.tsx`
+7. **Meta Tags**: Edit `index.html` for SEO and social sharing
 
 ### Styling
 
