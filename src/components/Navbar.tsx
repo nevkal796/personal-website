@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const navItems = [
+interface NavItem {
+  name: string
+  href: string
+}
+
+const navItems: NavItem[] = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
@@ -101,7 +106,7 @@ export default function Navbar() {
   )
 }
 
-function MobileMenu({ navItems, activeSection, scrollToSection }: { navItems: typeof navItems, activeSection: string, scrollToSection: (href: string) => void }) {
+function MobileMenu({ navItems, activeSection, scrollToSection }: { navItems: NavItem[], activeSection: string, scrollToSection: (href: string) => void }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -155,4 +160,3 @@ function MobileMenu({ navItems, activeSection, scrollToSection }: { navItems: ty
     </>
   )
 }
-
