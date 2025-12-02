@@ -47,6 +47,14 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/nevkal796/Car-Purchase-Machine-Learning-Model',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80',
   },
+  {
+    id: 5,
+    name: 'PsyTrack',
+    description: 'Custom-trained machine learning model for mental health journaling analysis. Processes daily journal entries and mood data to identify patterns and generate personalized insights using natural language processing and sentiment analysis.',
+    technologies: ['Python', 'TensorFlow', 'Pandas', 'FastAPI', 'SQLite', 'SQLModel', 'NLP'],
+    githubUrl: 'https://github.com/nevkal796/psytrack',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop&q=80',
+  },
 ]
 
 export default function Projects() {

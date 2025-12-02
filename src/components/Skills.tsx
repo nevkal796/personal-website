@@ -9,28 +9,28 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    category: 'Frontend',
-    skills: ['React', 'TypeScript', 'Next.js', 'Vue.js', 'Tailwind CSS', 'Framer Motion'],
-  },
-  {
-    category: 'Backend',
-    skills: ['Node.js', 'Python', 'Express.js', 'FastAPI', 'REST APIs', 'GraphQL'],
-  },
-  {
-    category: 'Database',
-    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Prisma', 'TypeORM'],
-  },
-  {
-    category: 'DevOps & Tools',
-    skills: ['Docker', 'AWS', 'Git', 'CI/CD', 'Linux', 'Nginx'],
-  },
-  {
     category: 'Languages',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'SQL', 'Bash'],
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'C', 'SQL', 'HTML/CSS'],
   },
   {
-    category: 'Other',
-    skills: ['Agile', 'Scrum', 'TDD', 'Microservices', 'System Design', 'Code Review'],
+    category: 'Frontend',
+    skills: ['React', 'React Native', 'Next.js', 'Tailwind CSS', 'Vite', 'Framer Motion'],
+  },
+  {
+    category: 'Backend & APIs',
+    skills: ['Node.js', 'Express', 'FastAPI', 'Flask', 'RESTful APIs', 'Microservices'],
+  },
+  {
+    category: 'AI & Machine Learning',
+    skills: ['TensorFlow', 'scikit-learn', 'OpenAI API', 'NLP', 'Pandas', 'NumPy'],
+  },
+  {
+    category: 'Databases & Cloud',
+    skills: ['PostgreSQL', 'Firebase', 'AWS', 'Google Cloud', 'Prisma ORM', 'SQLite'],
+  },
+  {
+    category: 'Tools & Practices',
+    skills: ['Git/GitHub', 'Docker', 'CI/CD', 'Agile/Scrum', 'TDD', 'Linux'],
   },
 ]
 
