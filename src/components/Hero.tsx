@@ -33,7 +33,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto"
           >
-            Software Engineer | Machine Learning & Full-Stack Development
+            Software Engineer | Artificial Intelligence & Full-Stack Development
           </motion.p>
           
           <motion.p
