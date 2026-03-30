@@ -8,12 +8,20 @@ interface Project {
   name: string
   description: string
   technologies: string[]
-  githubUrl: string
+  githubUrl?: string
   demoUrl?: string
   image: string
 }
 
 const projects: Project[] = [
+  {
+    id: 0,
+    name: 'Prime Aroma',
+    description: 'Full-stack e-commerce store for premium cologne decants and full bottles. Features a luxury mobile-first storefront, Stripe payments, Google OAuth, real-time order management, and a custom admin dashboard for product and order fulfillment.',
+    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Stripe', 'Tailwind CSS', 'Framer Motion', 'Resend'],
+    demoUrl: 'https://www.primearoma.shop',
+    image: 'https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=800&q=80',
+  },
   {
     id: 1,
     name: 'Zeropoint',
@@ -129,7 +137,7 @@ function ProjectCard({ project, index, isInView }: { project: Project, index: nu
         </div>
         
         <div className="flex gap-4">
-          {project.name !== 'AggieSeek' && (
+          {!!project.githubUrl && project.name !== 'AggieSeek' && (
             <motion.a
               href={project.githubUrl}
               target="_blank"
