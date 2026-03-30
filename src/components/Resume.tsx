@@ -1,21 +1,24 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, type MouseEvent } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import { Document, Page, pdfjs } from 'react-pdf'
+import {
+  DEFAULT_RESUME_FILENAME,
+  DEFAULT_RESUME_PATH,
+  getStoredResume,
+} from '../utils/resumeStorage'
 
 // Configure PDF.js worker
 // Using unpkg CDN which is more reliable
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
-// Configurable resume path - update this if you change the PDF filename
-const RESUME_PATH = '/resumefinal.pdf'
-const RESUME_FILENAME = 'Nevin_Kalloor_Resume.pdf'
-
 export default function Resume() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [pageWidth, setPageWidth] = useState<number>(800)
+  const [resumeFile, setResumeFile] = useState<string>(DEFAULT_RESUME_PATH)
+  const [resumeName, setResumeName] = useState<string>(DEFAULT_RESUME_FILENAME)
 
   // Set page width based on viewport
   useEffect(() => {
@@ -29,6 +32,24 @@ export default function Resume() {
 
   const [loadingError, setLoadingError] = useState<string | null>(null)
 
+  useEffect(() => {
+    const loadResume = () => {
+      const storedResume = getStoredResume()
+      if (storedResume?.base64) {
+        setResumeFile(`data:${storedResume.mimeType || 'application/pdf'};base64,${storedResume.base64}`)
+        setResumeName(storedResume.fileName || DEFAULT_RESUME_FILENAME)
+        return
+      }
+
+      setResumeFile(DEFAULT_RESUME_PATH)
+      setResumeName(DEFAULT_RESUME_FILENAME)
+    }
+
+    loadResume()
+    window.addEventListener('storage', loadResume)
+    return () => window.removeEventListener('storage', loadResume)
+  }, [])
+
   const onDocumentLoadSuccess = () => {
     setLoadingError(null)
   }
@@ -38,10 +59,22 @@ export default function Resume() {
     setLoadingError(error.message || 'Failed to load PDF')
   }
 
-  const handleDownload = () => {
+  const handleDownload = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    const storedResume = getStoredResume()
     const link = document.createElement('a')
-    link.href = RESUME_PATH
-    link.download = RESUME_FILENAME
+
+    if (storedResume?.base64) {
+      link.href = `data:${storedResume.mimeType || 'application/pdf'};base64,${storedResume.base64}`
+      link.download = storedResume.fileName || DEFAULT_RESUME_FILENAME
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      return
+    }
+
+    link.href = DEFAULT_RESUME_PATH
+    link.download = DEFAULT_RESUME_FILENAME
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -74,7 +107,7 @@ export default function Resume() {
         >
           <div className="flex justify-center w-full">
             <Document
-              file={RESUME_PATH}
+              file={resumeFile}
               onLoadSuccess={onDocumentLoadSuccess}
               onLoadError={onDocumentLoadError}
               loading={
@@ -85,7 +118,7 @@ export default function Resume() {
               error={
                 <div className="flex flex-col items-center justify-center py-20 text-center">
                   <div className="text-red-400 text-lg mb-2">Failed to load resume</div>
-                  <div className="text-gray-400 text-sm mb-2">Please ensure {RESUME_PATH} exists in the public folder</div>
+                  <div className="text-gray-400 text-sm mb-2">Please ensure {DEFAULT_RESUME_PATH} exists in the public folder</div>
                   {loadingError && (
                     <div className="text-gray-500 text-xs mt-2">Error: {loadingError}</div>
                   )}
@@ -110,8 +143,8 @@ export default function Resume() {
           className="mt-8 text-center"
         >
           <motion.a
-            href={RESUME_PATH}
-            download={RESUME_FILENAME}
+            href={resumeFile}
+            download={resumeName}
             onClick={handleDownload}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
